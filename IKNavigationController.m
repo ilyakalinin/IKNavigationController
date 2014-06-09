@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
+        self.delegate = self;
         self.pendingControllers = [[NSMutableArray alloc] init];
         
     }
