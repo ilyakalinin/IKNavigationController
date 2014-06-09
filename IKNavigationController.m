@@ -13,15 +13,15 @@
 #define METHOD_KEY @"method_key"
 #define TO_KEY @"to_key"
 
-typedef NS_ENUM(NSInteger, OVNavigationControllerMethod) {
-    OVNavigationControllerMethodPushView,
-    OVNavigationControllerMethodPopView,
-    OVNavigationControllerMethodPopToView,
-    OVNavigationControllerMethodPopToRoot
+typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
+    IKNavigationControllerMethodPushView,
+    IKNavigationControllerMethodPopView,
+    IKNavigationControllerMethodPopToView,
+    IKNavigationControllerMethodPopToRoot
     
 };
 
-@interface OVNavigationController ()
+@interface IKNavigationController ()
 
 @property (nonatomic, strong) NSMutableArray *pendingControllers;
 
@@ -56,25 +56,25 @@ typedef NS_ENUM(NSInteger, OVNavigationControllerMethod) {
         UIViewController* toViewController = [viewControllerObject objectForKey:TO_KEY];
         
         switch (navigationControllerMethod) {
-            case OVNavigationControllerMethodPushView:
+            case IKNavigationControllerMethodPushView:
                 [super pushViewController:doViewController animated:showAnimated];
                 break;
                 
-            case OVNavigationControllerMethodPopView:
+            case IKNavigationControllerMethodPopView:
                 if (self.topViewController == doViewController) {
                     [super popViewControllerAnimated:showAnimated];
                     
                 }
                 break;
                 
-            case OVNavigationControllerMethodPopToView:
+            case IKNavigationControllerMethodPopToView:
                 if (self.topViewController == doViewController) {
                     [super popToViewController:toViewController animated:YES];
                     
                 }
                 break;
                 
-            case OVNavigationControllerMethodPopToRoot:
+            case IKNavigationControllerMethodPopToRoot:
                 if (self.topViewController == doViewController) {
                     [super popToRootViewControllerAnimated:showAnimated];
                     
