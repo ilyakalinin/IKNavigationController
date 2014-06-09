@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 
 @end
 
-@implementation OVNavigationController
+@implementation IKNavigationController
 
 @synthesize pendingControllers = _pendingControllers;
 
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
     
     if ([self.pendingControllers count ] > 0) {
         NSDictionary *viewControllerObject = [self.pendingControllers objectAtIndex:0];
-        OVNavigationControllerMethod navigationControllerMethod = [[viewControllerObject objectForKey:METHOD_KEY] integerValue];
+        IKNavigationControllerMethod navigationControllerMethod = [[viewControllerObject objectForKey:METHOD_KEY] integerValue];
         BOOL showAnimated = [[viewControllerObject objectForKey:ANIMATED_KEY] boolValue];
         UIViewController* doViewController = [viewControllerObject objectForKey:VC_KEY];
         UIViewController* toViewController = [viewControllerObject objectForKey:TO_KEY];
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     NSDictionary *viewControllerObject = @{ VC_KEY: viewController,
                                             ANIMATED_KEY: [NSNumber numberWithBool:animated],
-                                            METHOD_KEY : [NSNumber numberWithInteger:OVNavigationControllerMethodPushView] };
+                                            METHOD_KEY : [NSNumber numberWithInteger:IKNavigationControllerMethodPushView] };
     @synchronized(self) {
         [self.pendingControllers addObject:viewControllerObject];
     
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     NSDictionary *viewControllerObject = @{ VC_KEY: self.topViewController,
                                             ANIMATED_KEY: [NSNumber numberWithBool:animated],
-                                            METHOD_KEY : [NSNumber numberWithInteger:OVNavigationControllerMethodPopView] };
+                                            METHOD_KEY : [NSNumber numberWithInteger:IKNavigationControllerMethodPopView] };
     @synchronized(self) {
         [self.pendingControllers addObject:viewControllerObject];
         
@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 - (NSArray *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     NSDictionary *viewControllerObject = @{ VC_KEY: self.topViewController,
                                             ANIMATED_KEY: [NSNumber numberWithBool:animated],
-                                            METHOD_KEY : [NSNumber numberWithInteger:OVNavigationControllerMethodPopToView],
+                                            METHOD_KEY : [NSNumber numberWithInteger:IKNavigationControllerMethodPopToView],
                                             TO_KEY : viewController };
     @synchronized(self) {
         [self.pendingControllers addObject:viewControllerObject];
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, IKNavigationControllerMethod) {
 - (NSArray *)popToRootViewControllerAnimated:(BOOL)animated {
     NSDictionary *viewControllerObject = @{ VC_KEY: self.topViewController,
                                             ANIMATED_KEY: [NSNumber numberWithBool:animated],
-                                            METHOD_KEY : [NSNumber numberWithInteger:OVNavigationControllerMethodPopToRoot] };
+                                            METHOD_KEY : [NSNumber numberWithInteger:IKNavigationControllerMethodPopToRoot] };
     @synchronized(self) {
         [self.pendingControllers addObject:viewControllerObject];
         
